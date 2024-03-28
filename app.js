@@ -30,15 +30,15 @@ function myTask() {
     allTask.appendChild(taskCard);
 
     newTaskInput.value = "";
-    alert("Task added successfully!");
+    alert("Congratulations, you added new task!");
   } else {
-    alert("Please enter a task.");
+    alert("Please enter a task!");
   }
 }
 
 function completeTask(event) {
   const taskCard = event.target.parentNode.parentNode;
-  taskCard.classList.toggle("completed");
+  taskCard.classList.toggle("Completed");
 }
 
 function removeTask(event) {
