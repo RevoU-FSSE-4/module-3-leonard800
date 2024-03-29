@@ -1,8 +1,4 @@
-async function fetchData() {
-  const request = new Request("https://module3-api-is2m.onrender.com/random-todos");
-  const response = await fetch(request);
-  return await response.json();
-}
+
 
 const taskList = document.getElementById('taskList');
 const newTask = document.getElementById('newTask');
@@ -67,3 +63,10 @@ completeButtons.forEach((button) => {
   const taskItem = button.parentNode.parentNode;
   button.addEventListener('click', completeTask.bind(null, taskItem));
 });
+
+
+async function fetchData() {
+  const request = new Request("https://module3-api-is2m.onrender.com/random-todos");
+  const response = await fetch(request);
+  return await response.json();
+}
