@@ -28,6 +28,8 @@ function addTask() {
 
     taskList.appendChild(taskItem);
     newTask.value = '';
+
+    alert('Task added successfully!');
   }
 }
 
