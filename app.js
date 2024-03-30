@@ -1,12 +1,33 @@
-
-
 const taskList = document.getElementById('taskList');
 const newTask = document.getElementById('newTask');
 const addTaskBtn = document.getElementById('addTaskBtn');
 const allTask = document.getElementById('allTask');
 
-function addTask() {
-  const taskText = newTask.value.trim();
+async function fetchData() {
+	try {
+		//const request = new Request("https://module3-api-is2m.onrender.com/random-todos");
+  		const response = await fetch("https://module3-api-is2m.onrender.com/random-todos");
+  		const testData = await response.json();
+  		console.log("testData :", testData);
+  		testData.forEach((task) => {
+  			const listItem = addTask(task);
+  			console.log("listItem", listItem);
+  			taskList.appendChild(listItem);
+  		}
+  		);
+  		//return await response.json();
+	}catch (error){
+		const errorMsg = document.createElement("P");
+		errorMsg.textContent = "Technical Failure!";
+		errorMsg.style.backgroundColor = 'red';
+		newTask.appendChild(errorMsg);
+	}
+}
+
+fetchData();
+
+function addTask(taskText) {
+  //const taskText = newTask.value.trim();
   if (taskText) {
     const taskItem = document.createElement('li');
     taskItem.textContent = taskText;
@@ -51,22 +72,15 @@ newTask.addEventListener('keyup', (event) => {
   }
 });
 
-const removeButtons = allTask.querySelectorAll('.actions button:last-child');
-const completeButtons = allTask.querySelectorAll('.actions button:first-child');
+//const removeButtons = allTask.querySelectorAll('.actions button:last-child');
+//const completeButtons = allTask.querySelectorAll('.actions button:first-child');
 
-removeButtons.forEach((button) => {
-  const taskItem = button.parentNode.parentNode;
-  button.addEventListener('click', removeTask.bind(null, taskItem));
-});
+//removeButtons.forEach((button) => {
+  //const taskItem = button.parentNode.parentNode;
+  //button.addEventListener('click', removeTask.bind(null, taskItem));
+//});
 
-completeButtons.forEach((button) => {
-  const taskItem = button.parentNode.parentNode;
-  button.addEventListener('click', completeTask.bind(null, taskItem));
-});
-
-
-async function fetchData() {
-  const request = new Request("https://module3-api-is2m.onrender.com/random-todos");
-  const response = await fetch(request);
-  return await response.json();
-}
+//completeButtons.forEach((button) => {
+  //const taskItem = button.parentNode.parentNode;
+  //button.addEventListener('click', completeTask.bind(null, taskItem));
+//});
